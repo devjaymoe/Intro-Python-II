@@ -11,7 +11,4 @@ class Room:
         self.w_to = None
 
     def __str__(self):
-        return f'The {self.name}... {self.description}'
-    
-    def check(self):
-        return f'To the north is {self.n_to}'
+        return f'Im at the {self.name}... {self.description}'
