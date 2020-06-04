@@ -61,16 +61,16 @@ room['treasure'].place_items(items['chest'], items['wine'])
 # Make a new player object that is currently in the 'outside' room.
 player = Player(room['outside'])
 
-def pickup_item(itemName, roomName):
-    for index, value in enumerate(room[roomName].room_items):
+def grab_item(itemName):
+    for index, value in enumerate(player.room.room_items):
         if value == items[itemName]:
-            room[roomName].room_items.pop(index)
+            player.room.room_items.pop(index)
             player.inventory.append(items[itemName])
             print(f'{items[itemName].name} has been added to your inventory!')
         else:
             print('Item not found in room.')
-
-pickup_item('hat', 'outside')
+# ex
+# grab_item('hat')
 
 def drop_item(itemName):
     for index, value in enumerate(player.inventory):
@@ -80,8 +80,8 @@ def drop_item(itemName):
             print(f'You dropped the {items[itemName].name} at the {player.room.name}')
         else:
             print('Item not found in inventory.')    
-
-drop_item('hat')
+# ex
+# drop_item('hat')
 
 # player.check_room()
 # player.pickup_item('hat')
@@ -98,27 +98,41 @@ drop_item('hat')
 #
 # If the user enters "q", quit the game.
 
-# game_on = True
+game_on = True
 
-# while game_on:
+while game_on:
 
-#     print(player.room)
+    print(player.room)
 
-#     player_action = input('Which Direction should I go?')
+    player_action = input('\nWhich Direction should I go?').lower().split()
 
-#     player_action = player_action.lower()
+    if len(player_action) == 1:
+        # gets first letter of one entry
+        player_action = player_action[0]
+    elif len(player_action) == 2:
+        # gets item name from second entry
+        item_name = player_action[1]
+        # gets action from first index and first letter
+        player_action = player_action[0][0]
 
-#     player_action = player_action[0]
-
-#     if player_action == 'n':
-#         player.move('n')
-#     elif player_action == 's':
-#         player.move('s')
-#     elif player_action == 'e':
-#         player.move('e')
-#     elif player_action == 'w':
-#         player.move('w')
-#     elif player_action == 'q':
-#         game_on = False
-#     else:
-#         print('I dont understand...')
+    # player movement
+    if player_action == 'n':
+        player.move('n')
+    elif player_action == 's':
+        player.move('s')
+    elif player_action == 'e':
+        player.move('e')
+    elif player_action == 'w':
+        player.move('w')
+    elif player_action == 'c':
+        player.check_room()
+    elif player_action == 'i':
+        player.check_inventory()
+    elif player_action == 'g':
+        grab_item(item_name)
+    elif player_action == 'd':
+        drop_item(item_name)
+    elif player_action == 'q':
+        game_on = False
+    else:
+        print('I dont understand that action...')

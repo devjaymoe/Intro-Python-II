@@ -30,14 +30,16 @@ class Player:
 
     def check_room(self):
         if len(self.room.room_items) >= 1:
+            print('I see some items around this room')
             for x in self.room.room_items:
-                print(x)
+                print(f'I see a {x.name}')
         else:
             print('No items in this room')
 
-    def pickup_item(self, item):
-        self.inventory = self.inventory.append(item)
-
     def check_inventory(self):
-        for x in self.inventory:
-            print(x)
+        print('Lets see whats in my inventory...')
+        if len(self.inventory) >= 1:
+            for x in self.inventory:
+                print(f'{x}\n')
+        else:
+            print('No items in my inventory')
