@@ -5,3 +5,6 @@ class Item:
     
     def __str__(self):
         return f' Item Name: {self.name},\n Description: {self.description}'
+
+    def on_take(self):
+        return f''

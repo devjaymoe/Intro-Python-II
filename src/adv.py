@@ -61,27 +61,29 @@ room['treasure'].place_items(items['chest'], items['wine'])
 # Make a new player object that is currently in the 'outside' room.
 player = Player(room['outside'])
 
-def grab_item(itemName):
-    for index, value in enumerate(player.room.room_items):
-        if value == items[itemName]:
-            player.room.room_items.pop(index)
-            player.inventory.append(items[itemName])
-            print(f'{items[itemName].name} has been added to your inventory!')
-        else:
-            print('Item not found in room.')
+# def grab_item(itemName):
+#     for index, value in enumerate(player.room.room_items):
+#         if value == items[itemName]:
+#             player.room.room_items.pop(index)
+#             player.inventory.append(items[itemName])
+#             print(f'{items[itemName].name} has been added to your inventory!')
+#         else:
+#             print('Item not found in room.')
 # ex
-# grab_item('hat')
 
-def drop_item(itemName):
-    for index, value in enumerate(player.inventory):
-        if value == items[itemName]:
-            player.inventory.pop(index)
-            player.room.room_items.append(items[itemName])
-            print(f'You dropped the {items[itemName].name} at the {player.room.name}')
-        else:
-            print('Item not found in inventory.')    
+# player.grab_item(items['hat'])
+
+# def drop_item(itemName):
+#     for index, value in enumerate(player.inventory):
+#         if value == items[itemName]:
+#             player.inventory.pop(index)
+#             player.room.room_items.append(items[itemName])
+#             print(f'You dropped the {items[itemName].name} at the {player.room.name}')
+#         else:
+#             print('Item not found in inventory.')    
 # ex
-# drop_item('hat')
+
+# player.drop_item(items['hat'])
 
 # player.check_room()
 # player.pickup_item('hat')
@@ -129,9 +131,9 @@ while game_on:
     elif player_action == 'i':
         player.check_inventory()
     elif player_action == 'g':
-        grab_item(item_name)
+        player.grab_item(items[item_name])
     elif player_action == 'd':
-        drop_item(item_name)
+        player.drop_item(items[item_name])
     elif player_action == 'q':
         game_on = False
     else:

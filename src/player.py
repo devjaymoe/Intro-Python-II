@@ -43,3 +43,21 @@ class Player:
                 print(f'{x}\n')
         else:
             print('No items in my inventory')
+    
+    def grab_item(self, itemObj):
+        for index, value in enumerate(self.room.room_items):
+            if value == itemObj:
+                self.room.room_items.pop(index)
+                self.inventory.append(itemObj)
+                print(f'{itemObj.name} has been added to your inventory!')
+            else:
+                print('Item not found in room.')
+
+    def drop_item(self, itemObj):
+        for index, value in enumerate(self.inventory):
+            if value == itemObj:
+                self.inventory.pop(index)
+                self.room.room_items.append(itemObj)
+                print(f'You dropped the {itemObj.name} at the {self.room.name}')
+            else:
+                print('Item not found in inventory.')
