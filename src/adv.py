@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from item import Item
 
 # Declare all the rooms
 
@@ -22,6 +23,15 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
 
+# Declare all items
+items = {
+    'key': Item('Key', 'A small key, wonder what it unlocks...'),
+    'sword': Item('Sword', 'A sharp sword, good for cutting.'),
+    'chest': Item('Chest', 'A small chest, it seems to be locked.'),
+    'glasses': Item('Glasses', 'A pair of glasses, might be useful'),
+    'hat': Item('Hat', 'Fancy hat, so stylish'),
+    'wine': Item('Wine Bottle', 'Wine, good for getting drunk!')
+}
 
 # Link rooms together
 
@@ -34,16 +44,36 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+# Placing items in rooms
+
+room['outside'].place_items(items['hat'])
+room['foyer'].place_items(items['sword'], items['glasses'])
+room['overlook'].place_items(items['key'])
+room['treasure'].place_items(items['chest'], items['wine'])
+
 # print(room['outside'])
 #
 # Main
 #
 
+# print(items['hat'] == room['outside'].room_items[0])
+
 # Make a new player object that is currently in the 'outside' room.
 player = Player(room['outside'])
 
-# print('room check: ', player.room)
-# player.move("north")
+def remove_item(name, roomName):
+    for index, value in enumerate(room[roomName].room_items):
+        if value == items[name]:
+            print('Item exists')
+            print(room[roomName].room_items[index])
+        else:
+            print('Item not found in room.')
+
+remove_item('hat', 'outside')
+
+# player.check_room()
+# player.pickup_item('hat')
+# player.check_room()
 
 # Write a loop that:
 #
@@ -56,27 +86,27 @@ player = Player(room['outside'])
 #
 # If the user enters "q", quit the game.
 
-game_off = False
+# game_on = True
 
-while not game_off:
+# while game_on:
 
-    print(player.room)
+#     print(player.room)
 
-    player_action = input('Which Direction should I go?')
+#     player_action = input('Which Direction should I go?')
 
-    player_action = player_action.lower()
+#     player_action = player_action.lower()
 
-    player_action = player_action[0]
+#     player_action = player_action[0]
 
-    if player_action == 'n':
-        player.move('n')
-    elif player_action == 's':
-        player.move('s')
-    elif player_action == 'e':
-        player.move('e')
-    elif player_action == 'w':
-        player.move('w')
-    elif player_action == 'q':
-        game_off = True
-    else:
-        print('I dont understand...')
+#     if player_action == 'n':
+#         player.move('n')
+#     elif player_action == 's':
+#         player.move('s')
+#     elif player_action == 'e':
+#         player.move('e')
+#     elif player_action == 'w':
+#         player.move('w')
+#     elif player_action == 'q':
+#         game_on = False
+#     else:
+#         print('I dont understand...')
