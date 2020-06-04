@@ -49,7 +49,7 @@ class Player:
             if value == itemObj:
                 self.room.room_items.pop(index)
                 self.inventory.append(itemObj)
-                print(f'{itemObj.name} has been added to your inventory!')
+                print(itemObj.on_take())
             else:
                 print('Item not found in room.')
 
@@ -58,6 +58,6 @@ class Player:
             if value == itemObj:
                 self.inventory.pop(index)
                 self.room.room_items.append(itemObj)
-                print(f'You dropped the {itemObj.name} at the {self.room.name}')
+                print(itemObj.on_drop())
             else:
                 print('Item not found in inventory.')

@@ -51,54 +51,12 @@ room['foyer'].place_items(items['sword'], items['glasses'])
 room['overlook'].place_items(items['key'])
 room['treasure'].place_items(items['chest'], items['wine'])
 
-# print(room['outside'])
 #
 # Main
 #
 
-# print(items['hat'] == room['outside'].room_items[0])
-
 # Make a new player object that is currently in the 'outside' room.
 player = Player(room['outside'])
-
-# def grab_item(itemName):
-#     for index, value in enumerate(player.room.room_items):
-#         if value == items[itemName]:
-#             player.room.room_items.pop(index)
-#             player.inventory.append(items[itemName])
-#             print(f'{items[itemName].name} has been added to your inventory!')
-#         else:
-#             print('Item not found in room.')
-# ex
-
-# player.grab_item(items['hat'])
-
-# def drop_item(itemName):
-#     for index, value in enumerate(player.inventory):
-#         if value == items[itemName]:
-#             player.inventory.pop(index)
-#             player.room.room_items.append(items[itemName])
-#             print(f'You dropped the {items[itemName].name} at the {player.room.name}')
-#         else:
-#             print('Item not found in inventory.')    
-# ex
-
-# player.drop_item(items['hat'])
-
-# player.check_room()
-# player.pickup_item('hat')
-# player.check_room()
-
-# Write a loop that:
-#
-# * Prints the current room name
-# * Prints the current description (the textwrap module might be useful here).
-# * Waits for user input and decides what to do.
-#
-# If the user enters a cardinal direction, attempt to move to the room there.
-# Print an error message if the movement isn't allowed.
-#
-# If the user enters "q", quit the game.
 
 game_on = True
 
