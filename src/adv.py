@@ -61,15 +61,27 @@ room['treasure'].place_items(items['chest'], items['wine'])
 # Make a new player object that is currently in the 'outside' room.
 player = Player(room['outside'])
 
-def remove_item(name, roomName):
+def pickup_item(itemName, roomName):
     for index, value in enumerate(room[roomName].room_items):
-        if value == items[name]:
-            print('Item exists')
-            print(room[roomName].room_items[index])
+        if value == items[itemName]:
+            room[roomName].room_items.pop(index)
+            player.inventory.append(items[itemName])
+            print(f'{items[itemName].name} has been added to your inventory!')
         else:
             print('Item not found in room.')
 
-remove_item('hat', 'outside')
+pickup_item('hat', 'outside')
+
+def drop_item(itemName):
+    for index, value in enumerate(player.inventory):
+        if value == items[itemName]:
+            player.inventory.pop(index)
+            player.room.room_items.append(items[itemName])
+            print(f'You dropped the {items[itemName].name} at the {player.room.name}')
+        else:
+            print('Item not found in inventory.')    
+
+drop_item('hat')
 
 # player.check_room()
 # player.pickup_item('hat')
